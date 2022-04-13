@@ -1,0 +1,13 @@
+.component-button-panel{
+    background-color: #444;
+    width: 70vh;
+    display: grid;
+    grid-row: 2;
+    justify-content: center;
+    font-size: 2rem;
+    grid-column: 5;
+}
+.component-button-panel div{
+    grid-row: 2;
+    
+}

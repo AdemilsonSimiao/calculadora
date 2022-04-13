@@ -41,4 +41,86 @@ export default function calculate(obj, buttonName){
             total: null,
         };
     }
+    if (buttonName === "%") {
+        if (obj.operation && obj.next){
+            const result = operate(obj.total, obj.next, obj.operation);
+            return{
+                total: Big(result)
+                .div(Big("100"))
+                .toString(),
+                next: null,
+                operation: null,
+            };
+        }
+        if (obj.next) {
+            return {
+                next: Big(obj.next)
+                .div(Big("100"))
+                .toString(),
+            };
+        }
+        return {};
+    }
+    if (buttonName === ".") {
+        if (obj.next){
+
+            // ignora um . se o próximo número já tiver um
+            if (obj.next.includes(".")){
+                return {};
+            }
+            return {next: obj.next + "."};
+        }
+        return {next: "0."};
+    }
+    if (buttonName === "=") {
+        if (obj.next && obj.operation){
+            return {
+                total: operate(obj.total, obj.next, obj.operation),
+                next: null,
+                operation: null,
+            };
+        }else {
+       // '=' sem operação, nada a fazer
+            return {};
+        }
+    }
+    if (buttonName === "+/-") {
+        if (obj.next) {
+            return { next: (-1 * parseFloat(obj.next)).toString()};
+        }
+        if (obj.total){
+            return { total: (-1 * parseFloat(obj.total)).toString()};
+        }
+        return {};
+    }
+     // Button deve ser uma operação
+
+  // Quando o usuário pressiona um botão de operação sem ter entrado
+  // um número primeiro, não faça nada.
+  // if (!obj.next && !obj.total) {
+  //   return {};
+  // }
+
+  // O usuário pressionou um botão de operação e existe uma operação existente
+    if ( obj.operation ) {
+        return {
+            total: operate(obj.total, obj.next, obj.operation),
+            next: null,
+            operation: buttonName,
+        };
+    }
+  // nenhuma operação ainda, mas o usuário digitou uma
+
+  // O usuário ainda não digitou um número, apenas salve a operação
+    
+    if (!obj.next) {
+        return { operation: buttonName};
+    }
+    
+    // salva a operação e muda 'próximo' para 'total'
+    return {
+        total: obj.next,
+        next: null,
+        operation: buttonName,
+    };
 }

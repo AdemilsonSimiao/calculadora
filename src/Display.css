@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+.component-display{
+    background-color: azure;
+    border: solid 4px #ccc;
+    width: 70vh;
+    grid-column: 5;
+    text-align: right;
+    height: 15vh;
+}
+.component-display div{
+    font-size: 3.5rem;
+    align-items: center;
+    padding-top: 5px;
+    
+}

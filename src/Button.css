@@ -1,0 +1,13 @@
+.component-button{
+   grid-template-areas: q w e r t
+                        a s d f g
+                        z c v b n
+                        p o i u h
+}
+button{
+    font-size: 3rem;
+    margin: auto;
+    width: 14vh;
+    border: solid;
+    height: 15vh;
+}
